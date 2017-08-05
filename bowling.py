@@ -10,27 +10,26 @@ def score(game):
         if frame < 10 and get_value(game[i]) == 10:
             if game[i] == '/':
                 result += get_value(game[i+1])
-            elif game[i] == 'X' or game[i] == 'x':
+            elif game[i] in ['X', 'x']:
                 result += get_value(game[i+1])
                 if game[i+2] == '/':
                     result += 10 - get_value(game[i+1])
                 else:
                     result += get_value(game[i+2])
         last = get_value(game[i])
-        if not in_first_half:
-            frame += 1
-        if in_first_half is True:
+        if in_first_half:
             in_first_half = False
         else:
             in_first_half = True
-        if game[i] == 'X' or game[i] == 'x':
+            frame += 1
+        if game[i] in ['X', 'x']:
             in_first_half = True
             frame += 1
     return result
 
 
 def get_value(char):
-    if char in [str(num) for num in range(1, 11)]:
+    if char in (str(num) for num in range(1, 11)):
         return int(char)
     elif char in ['X', 'x', '/']:
         return 10
