@@ -7,21 +7,13 @@ def score(game):
             result += 10 - get_value(game[roll-1])
         else:
             result += get_value(game[roll])
-
-        if frame < 10: #and get_value(game[roll]) == 10:
-
-            if game[roll] == '/':
-                result += get_value(game[roll+1])
-
-            elif game[roll] in ['X', 'x']:
-                result += get_value(game[roll+1])
-
+        if frame < 10 and game[roll] in ['X', 'x', '/']:
+            result += get_value(game[roll+1])
+            if game[roll] in ['X', 'x']:
                 if game[roll+2] == '/':
                     result += 10 - get_value(game[roll+1])
                 else:
                     result += get_value(game[roll+2])
-
-
         if not in_first_half or game[roll] in ['X', 'x']:
             in_first_half = True
             frame += 1
